@@ -3,30 +3,49 @@
 
 // ignore_for_file: invalid_use_of_internal_member, unused_import, unnecessary_import
 
+import '../api/end4.dart';
 import '../frb_generated.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-class End4 {
+class SocketOptions {
   final String appVersion;
   final String appType;
   final bool kIsDebug;
+  final FnPayloadRawClient onConnect;
+  final FnPayloadRawClient onConnecting;
+  final FnPayloadRawClient onDisconnect;
+  final FnPayloadRawClient onError;
 
-  const End4({
+  const SocketOptions({
     required this.appVersion,
     required this.appType,
     required this.kIsDebug,
+    required this.onConnect,
+    required this.onConnecting,
+    required this.onDisconnect,
+    required this.onError,
   });
 
   @override
   int get hashCode =>
-      appVersion.hashCode ^ appType.hashCode ^ kIsDebug.hashCode;
+      appVersion.hashCode ^
+      appType.hashCode ^
+      kIsDebug.hashCode ^
+      onConnect.hashCode ^
+      onConnecting.hashCode ^
+      onDisconnect.hashCode ^
+      onError.hashCode;
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is End4 &&
+      other is SocketOptions &&
           runtimeType == other.runtimeType &&
           appVersion == other.appVersion &&
           appType == other.appType &&
-          kIsDebug == other.kIsDebug;
+          kIsDebug == other.kIsDebug &&
+          onConnect == other.onConnect &&
+          onConnecting == other.onConnecting &&
+          onDisconnect == other.onDisconnect &&
+          onError == other.onError;
 }

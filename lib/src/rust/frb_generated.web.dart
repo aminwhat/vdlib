@@ -19,6 +19,20 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
     required super.portManager,
   });
 
+  CrossPlatformFinalizerArg
+      get rust_arc_decrement_strong_count_FnPayloadRawClientPtr => wire
+          .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient;
+
+  @protected
+  FnPayloadRawClient
+      dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+          dynamic raw);
+
+  @protected
+  FnPayloadRawClient
+      dco_decode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+          dynamic raw);
+
   @protected
   String dco_decode_String(dynamic raw);
 
@@ -26,13 +40,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   bool dco_decode_bool(dynamic raw);
 
   @protected
-  End4 dco_decode_box_autoadd_end_4(dynamic raw);
-
-  @protected
-  End4 dco_decode_end_4(dynamic raw);
+  SocketOptions dco_decode_box_autoadd_socket_options(dynamic raw);
 
   @protected
   Uint8List dco_decode_list_prim_u_8_strict(dynamic raw);
+
+  @protected
+  SocketOptions dco_decode_socket_options(dynamic raw);
 
   @protected
   int dco_decode_u_8(dynamic raw);
@@ -41,19 +55,33 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void dco_decode_unit(dynamic raw);
 
   @protected
+  int dco_decode_usize(dynamic raw);
+
+  @protected
+  FnPayloadRawClient
+      sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+          SseDeserializer deserializer);
+
+  @protected
+  FnPayloadRawClient
+      sse_decode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+          SseDeserializer deserializer);
+
+  @protected
   String sse_decode_String(SseDeserializer deserializer);
 
   @protected
   bool sse_decode_bool(SseDeserializer deserializer);
 
   @protected
-  End4 sse_decode_box_autoadd_end_4(SseDeserializer deserializer);
-
-  @protected
-  End4 sse_decode_end_4(SseDeserializer deserializer);
+  SocketOptions sse_decode_box_autoadd_socket_options(
+      SseDeserializer deserializer);
 
   @protected
   Uint8List sse_decode_list_prim_u_8_strict(SseDeserializer deserializer);
+
+  @protected
+  SocketOptions sse_decode_socket_options(SseDeserializer deserializer);
 
   @protected
   int sse_decode_u_8(SseDeserializer deserializer);
@@ -62,7 +90,20 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_decode_unit(SseDeserializer deserializer);
 
   @protected
+  int sse_decode_usize(SseDeserializer deserializer);
+
+  @protected
   int sse_decode_i_32(SseDeserializer deserializer);
+
+  @protected
+  void
+      sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+          FnPayloadRawClient self, SseSerializer serializer);
+
+  @protected
+  void
+      sse_encode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+          FnPayloadRawClient self, SseSerializer serializer);
 
   @protected
   void sse_encode_String(String self, SseSerializer serializer);
@@ -71,20 +112,24 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_bool(bool self, SseSerializer serializer);
 
   @protected
-  void sse_encode_box_autoadd_end_4(End4 self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_end_4(End4 self, SseSerializer serializer);
+  void sse_encode_box_autoadd_socket_options(
+      SocketOptions self, SseSerializer serializer);
 
   @protected
   void sse_encode_list_prim_u_8_strict(
       Uint8List self, SseSerializer serializer);
 
   @protected
+  void sse_encode_socket_options(SocketOptions self, SseSerializer serializer);
+
+  @protected
   void sse_encode_u_8(int self, SseSerializer serializer);
 
   @protected
   void sse_encode_unit(void self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_usize(int self, SseSerializer serializer);
 
   @protected
   void sse_encode_i_32(int self, SseSerializer serializer);
@@ -94,6 +139,18 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
 class RustLibWire implements BaseWire {
   RustLibWire.fromExternalLibrary(ExternalLibrary lib);
+
+  void rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+              ptr);
+
+  void rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+          dynamic ptr) =>
+      wasmModule
+          .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+              ptr);
 }
 
 @JS('wasm_bindgen')
@@ -107,4 +164,12 @@ class RustLibWasmModule implements WasmModule {
 
   @override
   external RustLibWasmModule bind(dynamic thisArg, String moduleName);
+
+  external void
+      rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+          dynamic ptr);
+
+  external void
+      rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+          dynamic ptr);
 }

@@ -7,5 +7,27 @@ import '../frb_generated.dart';
 import '../vdlib/vdlib.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-End4 newEnd4({required End4 end4, dynamic hint}) =>
-    RustLib.instance.api.newEnd4(end4: end4, hint: hint);
+void end4New({required SocketOptions socketOptions, dynamic hint}) =>
+    RustLib.instance.api.end4New(socketOptions: socketOptions, hint: hint);
+
+void end4Dispose({dynamic hint}) =>
+    RustLib.instance.api.end4Dispose(hint: hint);
+
+// Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::rust_async::RwLock<fn (Payload , RawClient)>>
+@sealed
+class FnPayloadRawClient extends RustOpaque {
+  FnPayloadRawClient.dcoDecode(List<dynamic> wire)
+      : super.dcoDecode(wire, _kStaticData);
+
+  FnPayloadRawClient.sseDecode(int ptr, int externalSizeOnNative)
+      : super.sseDecode(ptr, externalSizeOnNative, _kStaticData);
+
+  static final _kStaticData = RustArcStaticData(
+    rustArcIncrementStrongCount:
+        RustLib.instance.api.rust_arc_increment_strong_count_FnPayloadRawClient,
+    rustArcDecrementStrongCount:
+        RustLib.instance.api.rust_arc_decrement_strong_count_FnPayloadRawClient,
+    rustArcDecrementStrongCountPtr: RustLib
+        .instance.api.rust_arc_decrement_strong_count_FnPayloadRawClientPtr,
+  );
+}

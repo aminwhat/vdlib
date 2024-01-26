@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:vdlib/src/rust/api/simple.dart';
-import 'package:vdlib/src/rust/frb_generated.dart';
+// import 'package:vdlib/src/rust/frb_generated.dart';
+import 'package:vdlib/vdlib.dart';
 
 Future<void> main() async {
-  await RustLib.init();
+  // await RustLib.init();
+  await VDLib.init();
   runApp(const MyApp());
 }
 
