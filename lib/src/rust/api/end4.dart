@@ -3,8 +3,8 @@
 
 // ignore_for_file: invalid_use_of_internal_member, unused_import, unnecessary_import
 
-import '../end4/end4.dart';
 import '../frb_generated.dart';
+import '../vdlib/vdlib.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
 End4 newEnd4({required End4 end4, dynamic hint}) =>

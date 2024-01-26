@@ -1,11 +1,3 @@
-import 'package:vdlib/src/rust/frb_generated.dart';
+library vdlib;
 
-/// Vazir Database Library
-abstract class VDLib {
-  /// Initialize VDLib
-  ///
-  /// Must Be Called Before runningApp
-  static Future<void> init() async {
-    await RustLib.init();
-  }
-}
+export 'src/vdlib_base.dart';

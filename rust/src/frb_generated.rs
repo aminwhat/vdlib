@@ -59,7 +59,7 @@ fn wire_new_end4_impl(
             };
             let mut deserializer =
                 flutter_rust_bridge::for_generated::SseDeserializer::new(message);
-            let api_end4 = <crate::end4::end4::End4>::sse_decode(&mut deserializer);
+            let api_end4 = <crate::vdlib::vdlib::End4>::sse_decode(&mut deserializer);
             deserializer.end();
             transform_result_sse((move || {
                 Result::<_, ()>::Ok(crate::api::end4::new_end4(api_end4))
@@ -145,13 +145,13 @@ impl SseDecode for bool {
     }
 }
 
-impl SseDecode for crate::end4::end4::End4 {
+impl SseDecode for crate::vdlib::vdlib::End4 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_appVersion = <String>::sse_decode(deserializer);
         let mut var_appType = <String>::sse_decode(deserializer);
         let mut var_kIsDebug = <bool>::sse_decode(deserializer);
-        return crate::end4::end4::End4 {
+        return crate::vdlib::vdlib::End4 {
             app_version: var_appVersion,
             app_type: var_appType,
             k_is_debug: var_kIsDebug,
@@ -221,7 +221,7 @@ fn pde_ffi_dispatcher_sync_impl(
 // Section: rust2dart
 
 // Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for crate::end4::end4::End4 {
+impl flutter_rust_bridge::IntoDart for crate::vdlib::vdlib::End4 {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
             self.app_version.into_into_dart().into_dart(),
@@ -231,9 +231,9 @@ impl flutter_rust_bridge::IntoDart for crate::end4::end4::End4 {
         .into_dart()
     }
 }
-impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for crate::end4::end4::End4 {}
-impl flutter_rust_bridge::IntoIntoDart<crate::end4::end4::End4> for crate::end4::end4::End4 {
-    fn into_into_dart(self) -> crate::end4::end4::End4 {
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for crate::vdlib::vdlib::End4 {}
+impl flutter_rust_bridge::IntoIntoDart<crate::vdlib::vdlib::End4> for crate::vdlib::vdlib::End4 {
+    fn into_into_dart(self) -> crate::vdlib::vdlib::End4 {
         self
     }
 }
@@ -252,7 +252,7 @@ impl SseEncode for bool {
     }
 }
 
-impl SseEncode for crate::end4::end4::End4 {
+impl SseEncode for crate::vdlib::vdlib::End4 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <String>::sse_encode(self.app_version, serializer);

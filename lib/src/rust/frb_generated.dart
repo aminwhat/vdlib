@@ -7,9 +7,9 @@ import 'api/end4.dart';
 import 'api/simple.dart';
 import 'dart:async';
 import 'dart:convert';
-import 'end4/end4.dart';
 import 'frb_generated.io.dart' if (dart.library.html) 'frb_generated.web.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
+import 'vdlib/vdlib.dart';
 
 /// Main entrypoint of the Rust API
 class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
