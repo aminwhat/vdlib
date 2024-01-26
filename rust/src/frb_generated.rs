@@ -60,9 +60,10 @@ fn wire_end4_dispose_impl(
             };
             let mut deserializer =
                 flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_end4 = <crate::vdlib::vdlib::End4>::sse_decode(&mut deserializer);
             deserializer.end();
             transform_result_sse((move || {
-                Result::<_, ()>::Ok(crate::api::end4::end4_dispose())
+                Result::<_, ()>::Ok(crate::api::end4::end4_dispose(api_end4))
             })())
         },
     )
@@ -161,26 +162,41 @@ fn wire_init_app_impl(
 // Section: related_funcs
 
 flutter_rust_bridge::frb_generated_moi_arc_impl_value!(
-    flutter_rust_bridge::for_generated::rust_async::RwLock<fn(Payload, RawClient)>
+    flutter_rust_bridge::for_generated::rust_async::RwLock<Client>
+);
+flutter_rust_bridge::frb_generated_moi_arc_impl_value!(
+    flutter_rust_bridge::for_generated::rust_async::RwLock<fn()>
 );
 
 // Section: dart2rust
 
-impl SseDecode for fn(Payload, RawClient) {
+impl SseDecode for Client {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut inner = <RustOpaqueMoi<
-            flutter_rust_bridge::for_generated::rust_async::RwLock<fn(Payload, RawClient)>,
+            flutter_rust_bridge::for_generated::rust_async::RwLock<Client>,
         >>::sse_decode(deserializer);
         return inner.rust_auto_opaque_decode_owned();
     }
 }
 
-impl SseDecode
-    for RustOpaqueMoi<
-        flutter_rust_bridge::for_generated::rust_async::RwLock<fn(Payload, RawClient)>,
-    >
-{
+impl SseDecode for fn() {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <RustOpaqueMoi<flutter_rust_bridge::for_generated::rust_async::RwLock<fn ()>>>::sse_decode(deserializer);
+        return inner.rust_auto_opaque_decode_owned();
+    }
+}
+
+impl SseDecode for RustOpaqueMoi<flutter_rust_bridge::for_generated::rust_async::RwLock<Client>> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <usize>::sse_decode(deserializer);
+        return decode_rust_opaque_moi(inner);
+    }
+}
+
+impl SseDecode for RustOpaqueMoi<flutter_rust_bridge::for_generated::rust_async::RwLock<fn()>> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut inner = <usize>::sse_decode(deserializer);
@@ -203,6 +219,18 @@ impl SseDecode for bool {
     }
 }
 
+impl SseDecode for crate::vdlib::vdlib::End4 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_socket = <Client>::sse_decode(deserializer);
+        let mut var_socketOptions = <crate::vdlib::vdlib::SocketOptions>::sse_decode(deserializer);
+        return crate::vdlib::vdlib::End4 {
+            socket: var_socket,
+            socket_options: var_socketOptions,
+        };
+    }
+}
+
 impl SseDecode for Vec<u8> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -221,10 +249,10 @@ impl SseDecode for crate::vdlib::vdlib::SocketOptions {
         let mut var_appVersion = <String>::sse_decode(deserializer);
         let mut var_appType = <String>::sse_decode(deserializer);
         let mut var_kIsDebug = <bool>::sse_decode(deserializer);
-        let mut var_onConnect = <fn(Payload, RawClient)>::sse_decode(deserializer);
-        let mut var_onConnecting = <fn(Payload, RawClient)>::sse_decode(deserializer);
-        let mut var_onDisconnect = <fn(Payload, RawClient)>::sse_decode(deserializer);
-        let mut var_onError = <fn(Payload, RawClient)>::sse_decode(deserializer);
+        let mut var_onConnect = <fn()>::sse_decode(deserializer);
+        let mut var_onConnecting = <fn()>::sse_decode(deserializer);
+        let mut var_onDisconnect = <fn()>::sse_decode(deserializer);
+        let mut var_onError = <fn()>::sse_decode(deserializer);
         return crate::vdlib::vdlib::SocketOptions {
             app_version: var_appVersion,
             app_type: var_appType,
@@ -294,21 +322,74 @@ fn pde_ffi_dispatcher_sync_impl(
 
 // Section: rust2dart
 
-pub struct Local_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
-    fn(Payload, RawClient),
+pub struct Local_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClient(
+    Client,
 );
 // Codec=Dco (DartCObject based), see doc to use other codecs
-impl flutter_rust_bridge::IntoDart for Local_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient {
-                fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
-                    flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self.0).into_dart()
-                }
-            }
-impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for Local_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient {}
-impl flutter_rust_bridge::IntoIntoDart<Local_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient> for fn (Payload , RawClient) {
-            fn into_into_dart(self) -> Local_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient {
-                Local_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(self)
-            }
-        }
+impl flutter_rust_bridge::IntoDart
+    for Local_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClient
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self.0)
+            .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for Local_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClient
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        Local_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClient,
+    > for Client
+{
+    fn into_into_dart(
+        self,
+    ) -> Local_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClient {
+        Local_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClient(self)
+    }
+}
+pub struct Local_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn(fn());
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart
+    for Local_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn
+{
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self.0)
+            .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for Local_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn
+{
+}
+impl
+    flutter_rust_bridge::IntoIntoDart<
+        Local_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn,
+    > for fn()
+{
+    fn into_into_dart(
+        self,
+    ) -> Local_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn {
+        Local_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn(self)
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::vdlib::vdlib::End4 {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.socket.into_into_dart().into_dart(),
+            self.socket_options.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for crate::vdlib::vdlib::End4 {}
+impl flutter_rust_bridge::IntoIntoDart<crate::vdlib::vdlib::End4> for crate::vdlib::vdlib::End4 {
+    fn into_into_dart(self) -> crate::vdlib::vdlib::End4 {
+        self
+    }
+}
 // Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for crate::vdlib::vdlib::SocketOptions {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
@@ -336,23 +417,36 @@ impl flutter_rust_bridge::IntoIntoDart<crate::vdlib::vdlib::SocketOptions>
     }
 }
 
-impl SseEncode for fn(Payload, RawClient) {
+impl SseEncode for Client {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        <RustOpaqueMoi<
-            flutter_rust_bridge::for_generated::rust_async::RwLock<fn(Payload, RawClient)>,
-        >>::sse_encode(
+        <RustOpaqueMoi<flutter_rust_bridge::for_generated::rust_async::RwLock<Client>>>::sse_encode(
             flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self),
             serializer,
         );
     }
 }
 
-impl SseEncode
-    for RustOpaqueMoi<
-        flutter_rust_bridge::for_generated::rust_async::RwLock<fn(Payload, RawClient)>,
-    >
-{
+impl SseEncode for fn() {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <RustOpaqueMoi<flutter_rust_bridge::for_generated::rust_async::RwLock<fn()>>>::sse_encode(
+            flutter_rust_bridge::for_generated::rust_auto_opaque_encode::<_, MoiArc<_>>(self),
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for RustOpaqueMoi<flutter_rust_bridge::for_generated::rust_async::RwLock<Client>> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        let (ptr, size) = self.sse_encode_raw();
+        <usize>::sse_encode(ptr, serializer);
+        <i32>::sse_encode(size, serializer);
+    }
+}
+
+impl SseEncode for RustOpaqueMoi<flutter_rust_bridge::for_generated::rust_async::RwLock<fn()>> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         let (ptr, size) = self.sse_encode_raw();
@@ -375,6 +469,14 @@ impl SseEncode for bool {
     }
 }
 
+impl SseEncode for crate::vdlib::vdlib::End4 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Client>::sse_encode(self.socket, serializer);
+        <crate::vdlib::vdlib::SocketOptions>::sse_encode(self.socket_options, serializer);
+    }
+}
+
 impl SseEncode for Vec<u8> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -391,10 +493,10 @@ impl SseEncode for crate::vdlib::vdlib::SocketOptions {
         <String>::sse_encode(self.app_version, serializer);
         <String>::sse_encode(self.app_type, serializer);
         <bool>::sse_encode(self.k_is_debug, serializer);
-        <fn(Payload, RawClient)>::sse_encode(self.on_connect, serializer);
-        <fn(Payload, RawClient)>::sse_encode(self.on_connecting, serializer);
-        <fn(Payload, RawClient)>::sse_encode(self.on_disconnect, serializer);
-        <fn(Payload, RawClient)>::sse_encode(self.on_error, serializer);
+        <fn()>::sse_encode(self.on_connect, serializer);
+        <fn()>::sse_encode(self.on_connecting, serializer);
+        <fn()>::sse_encode(self.on_disconnect, serializer);
+        <fn()>::sse_encode(self.on_error, serializer);
     }
 }
 

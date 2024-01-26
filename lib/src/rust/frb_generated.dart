@@ -66,22 +66,25 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
 }
 
 abstract class RustLibApi extends BaseApi {
-  void end4Dispose({dynamic hint});
+  void end4Dispose({required End4 end4, dynamic hint});
 
-  void end4New({required SocketOptions socketOptions, dynamic hint});
+  End4 end4New({required SocketOptions socketOptions, dynamic hint});
 
   String greet({required String name, dynamic hint});
 
   Future<void> initApp({dynamic hint});
 
-  RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_FnPayloadRawClient;
+  RustArcIncrementStrongCountFnType get rust_arc_increment_strong_count_Client;
 
-  RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_FnPayloadRawClient;
+  RustArcDecrementStrongCountFnType get rust_arc_decrement_strong_count_Client;
 
-  CrossPlatformFinalizerArg
-      get rust_arc_decrement_strong_count_FnPayloadRawClientPtr;
+  CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_ClientPtr;
+
+  RustArcIncrementStrongCountFnType get rust_arc_increment_strong_count_Fn;
+
+  RustArcDecrementStrongCountFnType get rust_arc_decrement_strong_count_Fn;
+
+  CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_FnPtr;
 }
 
 class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
@@ -93,10 +96,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   });
 
   @override
-  void end4Dispose({dynamic hint}) {
+  void end4Dispose({required End4 end4, dynamic hint}) {
     return handler.executeSync(SyncTask(
       callFfi: () {
         final serializer = SseSerializer(generalizedFrbRustBinding);
+        sse_encode_box_autoadd_end_4(end4, serializer);
         return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 2)!;
       },
       codec: SseCodec(
@@ -104,7 +108,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         decodeErrorData: null,
       ),
       constMeta: kEnd4DisposeConstMeta,
-      argValues: [],
+      argValues: [end4],
       apiImpl: this,
       hint: hint,
     ));
@@ -112,11 +116,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   TaskConstMeta get kEnd4DisposeConstMeta => const TaskConstMeta(
         debugName: "end4_dispose",
-        argNames: [],
+        argNames: ["end4"],
       );
 
   @override
-  void end4New({required SocketOptions socketOptions, dynamic hint}) {
+  End4 end4New({required SocketOptions socketOptions, dynamic hint}) {
     return handler.executeSync(SyncTask(
       callFfi: () {
         final serializer = SseSerializer(generalizedFrbRustBinding);
@@ -124,7 +128,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 1)!;
       },
       codec: SseCodec(
-        decodeSuccessData: sse_decode_unit,
+        decodeSuccessData: sse_decode_end_4,
         decodeErrorData: null,
       ),
       constMeta: kEnd4NewConstMeta,
@@ -188,27 +192,47 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       );
 
   RustArcIncrementStrongCountFnType
-      get rust_arc_increment_strong_count_FnPayloadRawClient => wire
-          .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient;
+      get rust_arc_increment_strong_count_Client => wire
+          .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClient;
 
   RustArcDecrementStrongCountFnType
-      get rust_arc_decrement_strong_count_FnPayloadRawClient => wire
-          .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient;
+      get rust_arc_decrement_strong_count_Client => wire
+          .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClient;
+
+  RustArcIncrementStrongCountFnType get rust_arc_increment_strong_count_Fn => wire
+      .rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn;
+
+  RustArcDecrementStrongCountFnType get rust_arc_decrement_strong_count_Fn => wire
+      .rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn;
 
   @protected
-  FnPayloadRawClient
-      dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+  Client
+      dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClient(
           dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return FnPayloadRawClient.dcoDecode(raw as List<dynamic>);
+    return Client.dcoDecode(raw as List<dynamic>);
   }
 
   @protected
-  FnPayloadRawClient
-      dco_decode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+  Fn dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn(
+      dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return Fn.dcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  Client
+      dco_decode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClient(
           dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
-    return FnPayloadRawClient.dcoDecode(raw as List<dynamic>);
+    return Client.dcoDecode(raw as List<dynamic>);
+  }
+
+  @protected
+  Fn dco_decode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn(
+      dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return Fn.dcoDecode(raw as List<dynamic>);
   }
 
   @protected
@@ -224,9 +248,29 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  End4 dco_decode_box_autoadd_end_4(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_end_4(raw);
+  }
+
+  @protected
   SocketOptions dco_decode_box_autoadd_socket_options(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_socket_options(raw);
+  }
+
+  @protected
+  End4 dco_decode_end_4(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2)
+      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return End4(
+      socket:
+          dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClient(
+              arr[0]),
+      socketOptions: dco_decode_socket_options(arr[1]),
+    );
   }
 
   @protected
@@ -246,16 +290,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       appType: dco_decode_String(arr[1]),
       kIsDebug: dco_decode_bool(arr[2]),
       onConnect:
-          dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+          dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn(
               arr[3]),
       onConnecting:
-          dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+          dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn(
               arr[4]),
       onDisconnect:
-          dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+          dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn(
               arr[5]),
       onError:
-          dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+          dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn(
               arr[6]),
     );
   }
@@ -279,20 +323,36 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  FnPayloadRawClient
-      sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+  Client
+      sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClient(
           SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return FnPayloadRawClient.sseDecode(
+    return Client.sseDecode(
         sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
   }
 
   @protected
-  FnPayloadRawClient
-      sse_decode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+  Fn sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return Fn.sseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  Client
+      sse_decode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClient(
           SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return FnPayloadRawClient.sseDecode(
+    return Client.sseDecode(
+        sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
+  }
+
+  @protected
+  Fn sse_decode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn(
+      SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return Fn.sseDecode(
         sse_decode_usize(deserializer), sse_decode_i_32(deserializer));
   }
 
@@ -310,10 +370,26 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  End4 sse_decode_box_autoadd_end_4(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_end_4(deserializer));
+  }
+
+  @protected
   SocketOptions sse_decode_box_autoadd_socket_options(
       SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_socket_options(deserializer));
+  }
+
+  @protected
+  End4 sse_decode_end_4(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_socket =
+        sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClient(
+            deserializer);
+    var var_socketOptions = sse_decode_socket_options(deserializer);
+    return End4(socket: var_socket, socketOptions: var_socketOptions);
   }
 
   @protected
@@ -330,16 +406,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     var var_appType = sse_decode_String(deserializer);
     var var_kIsDebug = sse_decode_bool(deserializer);
     var var_onConnect =
-        sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+        sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn(
             deserializer);
     var var_onConnecting =
-        sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+        sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn(
             deserializer);
     var var_onDisconnect =
-        sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+        sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn(
             deserializer);
     var var_onError =
-        sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+        sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn(
             deserializer);
     return SocketOptions(
         appVersion: var_appVersion,
@@ -376,16 +452,31 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   @protected
   void
-      sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
-          FnPayloadRawClient self, SseSerializer serializer) {
+      sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClient(
+          Client self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_usize(self.sseEncode(move: true), serializer);
   }
 
   @protected
   void
-      sse_encode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
-          FnPayloadRawClient self, SseSerializer serializer) {
+      sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn(
+          Fn self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(self.sseEncode(move: true), serializer);
+  }
+
+  @protected
+  void
+      sse_encode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClient(
+          Client self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_usize(self.sseEncode(move: null), serializer);
+  }
+
+  @protected
+  void sse_encode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn(
+      Fn self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_usize(self.sseEncode(move: null), serializer);
   }
@@ -403,10 +494,24 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_box_autoadd_end_4(End4 self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_end_4(self, serializer);
+  }
+
+  @protected
   void sse_encode_box_autoadd_socket_options(
       SocketOptions self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_socket_options(self, serializer);
+  }
+
+  @protected
+  void sse_encode_end_4(End4 self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClient(
+        self.socket, serializer);
+    sse_encode_socket_options(self.socketOptions, serializer);
   }
 
   @protected
@@ -423,13 +528,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_String(self.appVersion, serializer);
     sse_encode_String(self.appType, serializer);
     sse_encode_bool(self.kIsDebug, serializer);
-    sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+    sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn(
         self.onConnect, serializer);
-    sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+    sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn(
         self.onConnecting, serializer);
-    sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+    sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn(
         self.onDisconnect, serializer);
-    sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+    sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn(
         self.onError, serializer);
   }
 

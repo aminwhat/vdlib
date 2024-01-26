@@ -20,19 +20,29 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
     required super.portManager,
   });
 
-  CrossPlatformFinalizerArg
-      get rust_arc_decrement_strong_count_FnPayloadRawClientPtr => wire
-          ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClientPtr;
+  CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_ClientPtr => wire
+      ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClientPtr;
+
+  CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_FnPtr => wire
+      ._rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPtr;
 
   @protected
-  FnPayloadRawClient
-      dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+  Client
+      dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClient(
           dynamic raw);
 
   @protected
-  FnPayloadRawClient
-      dco_decode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+  Fn dco_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn(
+      dynamic raw);
+
+  @protected
+  Client
+      dco_decode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClient(
           dynamic raw);
+
+  @protected
+  Fn dco_decode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn(
+      dynamic raw);
 
   @protected
   String dco_decode_String(dynamic raw);
@@ -41,7 +51,13 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   bool dco_decode_bool(dynamic raw);
 
   @protected
+  End4 dco_decode_box_autoadd_end_4(dynamic raw);
+
+  @protected
   SocketOptions dco_decode_box_autoadd_socket_options(dynamic raw);
+
+  @protected
+  End4 dco_decode_end_4(dynamic raw);
 
   @protected
   Uint8List dco_decode_list_prim_u_8_strict(dynamic raw);
@@ -59,14 +75,22 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   int dco_decode_usize(dynamic raw);
 
   @protected
-  FnPayloadRawClient
-      sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+  Client
+      sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClient(
           SseDeserializer deserializer);
 
   @protected
-  FnPayloadRawClient
-      sse_decode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+  Fn sse_decode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn(
+      SseDeserializer deserializer);
+
+  @protected
+  Client
+      sse_decode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClient(
           SseDeserializer deserializer);
+
+  @protected
+  Fn sse_decode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn(
+      SseDeserializer deserializer);
 
   @protected
   String sse_decode_String(SseDeserializer deserializer);
@@ -75,8 +99,14 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   bool sse_decode_bool(SseDeserializer deserializer);
 
   @protected
+  End4 sse_decode_box_autoadd_end_4(SseDeserializer deserializer);
+
+  @protected
   SocketOptions sse_decode_box_autoadd_socket_options(
       SseDeserializer deserializer);
+
+  @protected
+  End4 sse_decode_end_4(SseDeserializer deserializer);
 
   @protected
   Uint8List sse_decode_list_prim_u_8_strict(SseDeserializer deserializer);
@@ -98,13 +128,22 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void
-      sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
-          FnPayloadRawClient self, SseSerializer serializer);
+      sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClient(
+          Client self, SseSerializer serializer);
 
   @protected
   void
-      sse_encode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
-          FnPayloadRawClient self, SseSerializer serializer);
+      sse_encode_Auto_Owned_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn(
+          Fn self, SseSerializer serializer);
+
+  @protected
+  void
+      sse_encode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClient(
+          Client self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn(
+      Fn self, SseSerializer serializer);
 
   @protected
   void sse_encode_String(String self, SseSerializer serializer);
@@ -113,8 +152,14 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_bool(bool self, SseSerializer serializer);
 
   @protected
+  void sse_encode_box_autoadd_end_4(End4 self, SseSerializer serializer);
+
+  @protected
   void sse_encode_box_autoadd_socket_options(
       SocketOptions self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_end_4(End4 self, SseSerializer serializer);
 
   @protected
   void sse_encode_list_prim_u_8_strict(
@@ -151,34 +196,66 @@ class RustLibWire implements BaseWire {
       : _lookup = dynamicLibrary.lookup;
 
   void
-      rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+      rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClient(
     ffi.Pointer<ffi.Void> ptr,
   ) {
-    return _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+    return _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClient(
       ptr,
     );
   }
 
-  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClientPtr =
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClientPtr =
       _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
-          'frbgen_vdlib_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient');
-  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient =
-      _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClientPtr
+          'frbgen_vdlib_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClient');
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClient =
+      _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClientPtr
           .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
 
   void
-      rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+      rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClient(
     ffi.Pointer<ffi.Void> ptr,
   ) {
-    return _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient(
+    return _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClient(
       ptr,
     );
   }
 
-  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClientPtr =
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClientPtr =
       _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
-          'frbgen_vdlib_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient');
-  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClient =
-      _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPayloadRawClientPtr
+          'frbgen_vdlib_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClient');
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClient =
+      _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockClientPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+      rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+          'frbgen_vdlib_rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn');
+  late final _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn =
+      _rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPtr
+          .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
+
+  void
+      rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn(
+    ffi.Pointer<ffi.Void> ptr,
+  ) {
+    return _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn(
+      ptr,
+    );
+  }
+
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ffi.Void>)>>(
+          'frbgen_vdlib_rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn');
+  late final _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfn =
+      _rust_arc_decrement_strong_count_RustOpaque_flutter_rust_bridgefor_generatedrust_asyncRwLockfnPtr
           .asFunction<void Function(ffi.Pointer<ffi.Void>)>();
 }

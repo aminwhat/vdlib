@@ -7,14 +7,35 @@ import '../api/end4.dart';
 import '../frb_generated.dart';
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
+class End4 {
+  final Client socket;
+  final SocketOptions socketOptions;
+
+  const End4({
+    required this.socket,
+    required this.socketOptions,
+  });
+
+  @override
+  int get hashCode => socket.hashCode ^ socketOptions.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is End4 &&
+          runtimeType == other.runtimeType &&
+          socket == other.socket &&
+          socketOptions == other.socketOptions;
+}
+
 class SocketOptions {
   final String appVersion;
   final String appType;
   final bool kIsDebug;
-  final FnPayloadRawClient onConnect;
-  final FnPayloadRawClient onConnecting;
-  final FnPayloadRawClient onDisconnect;
-  final FnPayloadRawClient onError;
+  final Fn onConnect;
+  final Fn onConnecting;
+  final Fn onDisconnect;
+  final Fn onError;
 
   const SocketOptions({
     required this.appVersion,

@@ -1,6 +1,5 @@
 use rust_socketio::{client::Client, ClientBuilder, Payload, RawClient};
 use serde_json::{self, json};
-use std::{fmt::format, time::Duration};
 
 pub struct End4 {
     pub socket: Client,
@@ -11,10 +10,24 @@ pub struct SocketOptions {
     pub app_version: String,
     pub app_type: String,
     pub k_is_debug: bool,
-    pub on_connect: fn(Payload, RawClient),
-    pub on_connecting: fn(Payload, RawClient),
-    pub on_disconnect: fn(Payload, RawClient),
-    pub on_error: fn(Payload, RawClient),
+    pub on_connect: fn(),
+    pub on_connecting: fn(),
+    pub on_disconnect: fn(),
+    pub on_error: fn(),
+}
+
+impl SocketOptions {
+    pub fn default() -> Self {
+        SocketOptions {
+            app_version: String::new(),
+            app_type: String::new(),
+            k_is_debug: true,
+            on_connect: || {},
+            on_connecting: || {},
+            on_disconnect: || {},
+            on_error: || {},
+        }
+    }
 }
 
 impl End4 {
@@ -30,10 +43,18 @@ impl End4 {
             socket_options.app_type,
             socket_options.app_version.chars().next().unwrap()
         ))
-        .on("connect", socket_options.on_connect)
-        .on("disconnect", socket_options.on_disconnect)
-        .on("error", socket_options.on_error)
-        .on("connect_error", onConnectError)
+        .on("connect", |payload, socket: RawClient| {
+            on_connect(&socket_options, payload, socket)
+        })
+        .on("disconnect", |payload, socket| {
+            on_disconnect(&socket_options, payload, socket)
+        })
+        .on("error", |payload, socket| {
+            on_error(&socket_options, payload, socket)
+        })
+        .on("connect_error", |payload, socket| {
+            on_connect_error(&socket_options, payload, socket)
+        })
         .auth(json!({}))
         .connect()
         .expect("Connection failed");
@@ -62,4 +83,7 @@ impl End4 {
 //         .expect("Server unreachable")
 // }
 
-fn onConnectError(payload: Payload, socket: RawClient) {}
+fn on_connect_error(socket_options: &SocketOptions, payload: Payload, socket: RawClient) {}
+fn on_connect(socket_options: &SocketOptions, payload: Payload, socket: RawClient) {}
+fn on_disconnect(socket_options: &SocketOptions, payload: Payload, socket: RawClient) {}
+fn on_error(socket_options: &SocketOptions, payload: Payload, socket: RawClient) {}
