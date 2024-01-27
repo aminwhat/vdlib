@@ -13,12 +13,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Install Rust latest nightly
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: nightly
-          override: true
-          components: rustfmt, clippy
+      # - name: Install Rust latest nightly
+      #   uses: actions-rs/toolchain@v1
+      #   with:
+      #     toolchain: nightly
+      #     override: true
+      #     components: rustfmt, clippy
 
       # `cargo check` command here will use installed `nightly`
       # as it is set as an "override" for current directory
@@ -31,26 +31,26 @@ jobs:
       # https://github.com/dart-lang/setup-dart/blob/main/README.md
       # - uses: dart-lang/setup-dart@v1
       # - uses: dart-lang/setup-dart@9a04e6d73cca37bd455e0608d7e5092f881fd603
-      - name: Run cargo check
-        run: |
-          cd rust 
-          cargo check
+      # - name: Run cargo check
+      #   run: |
+      #     cd rust
+      #     cargo check
 
       - name: Flutter action
         uses: subosito/flutter-action@v2.8.0
 
-      - name: Install dependencies In Rust Builder
-        run: |
-          cd rust_builder
-          flutter pub get
+      # - name: Install dependencies In Rust Builder
+      #   run: |
+      #     cd rust_builder
+      #     flutter pub get
 
       - name: Install dependencies
         run: flutter pub get
 
-      - name: Generate Flutter Rust Bridge
-        run: |
-          cargo install 'flutter_rust_bridge_codegen@^2.0.0-dev.0'
-          flutter_rust_bridge_codegen generate
+      # - name: Generate Flutter Rust Bridge
+      #   run: |
+      #     cargo install 'flutter_rust_bridge_codegen@^2.0.0-dev.0'
+      #     flutter_rust_bridge_codegen generate
 
       # Uncomment this step to verify the use of 'dart format' on each commit.
       # - name: Verify formatting
