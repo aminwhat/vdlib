@@ -1,10 +1,13 @@
 import 'package:realm/realm.dart';
+import 'package:vdlib/src/connection/connection.dart';
 import 'package:vdlib/src/db/keyvalue.dart';
 
 class VDB<T extends RealmObject> {
+  static late VConnection vConnection;
+
   late final Realm realm;
   late List<T> changes;
-  VDB(Configuration config) {
+  VDB(Configuration config) : assert(vConnection == vConnection) {
     realm = Realm(config);
     changes = realm.all<T>().toList();
   }
@@ -29,9 +32,12 @@ class VDB<T extends RealmObject> {
 }
 
 class VKvDB {
+  static late VConnection vConnection;
+
   late final Realm realm;
   late List<KeyValue> changes;
-  VKvDB({bool shouldDeleteIfMigrationNeeded = false, int schemaVersion = 0}) {
+  VKvDB({bool shouldDeleteIfMigrationNeeded = false, int schemaVersion = 0})
+      : assert(vConnection == vConnection) {
     realm = Realm(Configuration.local(
       [KeyValue.schema],
       shouldDeleteIfMigrationNeeded: shouldDeleteIfMigrationNeeded,
