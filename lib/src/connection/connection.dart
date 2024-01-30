@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
 import 'package:vdlib/src/connection/stream_controller.dart';
 import 'package:vdlib/src/db/db.dart';
-import 'package:vdlib/src/db/keyvalue.dart';
 import 'package:vdlib/src/widgets/widgets.dart';
 
 export 'stream_controller.dart';
@@ -38,7 +37,7 @@ class VConnection {
     required void Function(ConnectionStatus status) onStatus,
   }) {
     socket = io.io(
-      '${kDebugMode ? 'http:localhost:3779' : 'https:api.vazir.io'}/${options.subSocketPath}.v${options.appVersion[0]}',
+      '${kDebugMode ? 'http://localhost:3779' : 'https://api.vazir.io'}/${options.subSocketPath}.v${options.appVersion[0]}',
       io.OptionBuilder().setTransports(['websocket']).setAuth({
         'clientId': vKvDB.get('vdlib_connection_clientId'),
         'version': options.appVersion,
