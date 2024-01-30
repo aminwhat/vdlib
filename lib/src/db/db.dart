@@ -7,7 +7,7 @@ class VDB<T extends RealmObject> {
 
   late final Realm realm;
   late List<T> changes;
-  VDB(Configuration config) : assert(vConnection == vConnection) {
+  VDB(Configuration config) {
     realm = Realm(config);
     changes = realm.all<T>().toList();
   }
@@ -36,8 +36,8 @@ class VKvDB {
 
   late final Realm realm;
   late List<KeyValue> changes;
-  VKvDB({bool shouldDeleteIfMigrationNeeded = false, int schemaVersion = 0})
-      : assert(vConnection == vConnection) {
+
+  VKvDB({bool shouldDeleteIfMigrationNeeded = false, int schemaVersion = 0}) {
     realm = Realm(Configuration.local(
       [KeyValue.schema],
       shouldDeleteIfMigrationNeeded: shouldDeleteIfMigrationNeeded,
