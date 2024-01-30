@@ -2,6 +2,8 @@ import 'package:realm/realm.dart';
 import 'package:vdlib/src/connection/connection.dart';
 import 'package:vdlib/src/db/keyvalue.dart';
 
+export 'keyvalue.dart';
+
 class VDB<T extends RealmObject> {
   static late VConnection vConnection;
 

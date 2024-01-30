@@ -7,6 +7,8 @@ import 'package:vdlib/src/db/db.dart';
 import 'package:vdlib/src/db/keyvalue.dart';
 import 'package:vdlib/src/widgets/widgets.dart';
 
+export 'stream_controller.dart';
+
 class VConnectionOptions extends Equatable {
   final String subSocketPath;
   final String appVersion;
