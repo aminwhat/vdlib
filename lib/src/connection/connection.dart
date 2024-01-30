@@ -13,12 +13,14 @@ class VConnectionOptions extends Equatable {
   final String appVersion;
   final String appBuildToken;
   final void Function()? onLogOut;
+  final void Function(dynamic data)? onStatus;
 
   const VConnectionOptions({
     required this.subSocketPath,
     required this.appVersion,
     required this.appBuildToken,
     this.onLogOut,
+    this.onStatus,
   });
 
   @override
@@ -96,6 +98,10 @@ class VConnection {
 
     socket.on('msg', (data) {
       _showSnackBar(data.toString());
+    });
+
+    socket.on('status', (data) {
+      options.onStatus?.call(data);
     });
   }
 
