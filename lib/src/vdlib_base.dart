@@ -7,11 +7,13 @@ import 'package:vdlib/src/db/db.dart';
 abstract class VDLib {
   static VConnection? _connection;
   static bool _initialized = false;
+  static bool _forced = false;
 
   ///
   /// Initialize when Main part of the app start to function
-  static Future<void> init() async {
+  static Future<void> init([bool forced = false]) async {
     _initialized = true;
+    _forced = forced;
   }
 
   /// Basic Connection to the server
@@ -35,8 +37,7 @@ abstract class VDLib {
   /// Create vDB instance from a Configuration and custom schema
   ///
   static VDB vDB<T extends RealmObject>(Configuration config) {
-    assert(_initialized);
-    assert(_connection != null);
+    _checkForced();
     VDB.vConnection = _connection!;
     return VDB<T>(config);
   }
@@ -44,10 +45,16 @@ abstract class VDLib {
   /// Create Key Value vDB instance
   ///
   static VKvDB vKvDB() {
-    assert(_initialized);
-    assert(_connection != null);
+    _checkForced();
     VKvDB.vConnection = _connection!;
     return VKvDB();
+  }
+
+  static void _checkForced() {
+    if (_forced) {
+      assert(_initialized);
+      assert(_connection != null);
+    }
   }
 
   static void dispose() {
