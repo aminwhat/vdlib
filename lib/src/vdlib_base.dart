@@ -31,6 +31,8 @@ abstract class VDLib {
       context: context,
     );
     assert(_connection != null);
+    VDB.vConnection = _connection!;
+    VKvDB.vConnection = _connection!;
     return _connection!;
   }
 
@@ -38,7 +40,6 @@ abstract class VDLib {
   ///
   static VDB vDB<T extends RealmObject>(Configuration config) {
     _checkForced();
-    VDB.vConnection = _connection!;
     return VDB<T>(config);
   }
 
@@ -46,7 +47,6 @@ abstract class VDLib {
   ///
   static VKvDB vKvDB() {
     _checkForced();
-    VKvDB.vConnection = _connection!;
     return VKvDB();
   }
 
