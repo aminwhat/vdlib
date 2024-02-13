@@ -93,10 +93,10 @@ packages:
     dependency: transitive
     description:
       name: build_runner_core
-      sha256: c9e32d21dd6626b5c163d48b037ce906bbe428bc23ab77bcd77bb21e593b6185
+      sha256: "4ae8ffe5ac758da294ecf1802f2aff01558d8b1b00616aa7538ea9a8a5d50799"
       url: "https://pub.dev"
     source: hosted
-    version: "7.2.11"
+    version: "7.3.0"
   built_collection:
     dependency: transitive
     description:
@@ -444,34 +444,34 @@ packages:
     dependency: transitive
     description:
       name: realm
-      sha256: "1c56969c3eda8de3e6036e88a898d478fb7584a41ab2258c6b8a1cbe7c1473f1"
+      sha256: a53b6903e2f6603c906bf5aac3691f0b2f45262aa08525a4bd546900602f2f17
       url: "https://pub.dev"
     source: hosted
-    version: "1.8.0"
+    version: "1.9.0"
   realm_common:
     dependency: transitive
     description:
       name: realm_common
-      sha256: "6862af43a1f0368dca311a480c14890f2b1d30d5b4392b3c4ee35fc31988de02"
+      sha256: "29516a9e43a9e75b2e16226ce24ccd9a549d9377e69be218394d8fb84da11183"
       url: "https://pub.dev"
     source: hosted
-    version: "1.8.0"
+    version: "1.9.0"
   realm_dart:
     dependency: transitive
     description:
       name: realm_dart
-      sha256: d99eb4e3a0e42b514ad5b21d7d166977d9578bb98ce945dc802b45b558409c8b
+      sha256: "55cf02d26b0775e79570cf0ba6e4036a10c66250b99cb8f1ee41d71057206a7f"
       url: "https://pub.dev"
     source: hosted
-    version: "1.8.0"
+    version: "1.9.0"
   realm_generator:
     dependency: transitive
     description:
       name: realm_generator
-      sha256: "8be144cd5e93d1c45462cb7bca67806b0d75fcbd364d0d0fc44debc1a900cfb6"
+      sha256: "6d26ca214aad1b49f37a1a86f3216f19a25657d38d82cefb16551a35aa316ec1"
       url: "https://pub.dev"
     source: hosted
-    version: "1.8.0"
+    version: "1.9.0"
   sane_uuid:
     dependency: transitive
     description:

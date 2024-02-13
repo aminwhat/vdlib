@@ -1,6 +1,6 @@
 # vdlib
 
-A new Flutter project.
+A native API for vazir applications
 
 ## Getting Started
 

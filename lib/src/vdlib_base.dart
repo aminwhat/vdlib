@@ -1,9 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:realm/realm.dart';
 import 'package:vdlib/src/connection/connection.dart';
 import 'package:vdlib/src/db/db.dart';
 
-/// Vazir Database Library
+/// *Vazir Database Library*
 abstract class VDLib {
   static VConnection? _connection;
   static bool _initialized = false;
@@ -12,13 +13,14 @@ abstract class VDLib {
   ///
   /// Initialize when Main part of the app start to function
   static Future<void> init([bool forced = false]) async {
+    assert(!kIsWeb);
     _initialized = true;
     _forced = forced;
   }
 
   /// Basic Connection to the server
   ///
-  /// [*Required for other parts*]
+  /// [*Required for (initializing the app/other parts)*]
   static VConnection vConnection(
     BuildContext context,
     VConnectionOptions options,
