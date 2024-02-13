@@ -61,6 +61,7 @@ abstract class VDLib {
 
   static void dispose() {
     _initialized = false;
+    _forced = false;
     _connection = null;
   }
 }
