@@ -8,11 +8,13 @@ class VStreamControllerOptions<T extends Equatable> extends Equatable {
   final io.Socket socket;
   final T Function(Map<String, dynamic> val) onValue;
   final String eventAndEmit;
+  final dynamic data;
 
   const VStreamControllerOptions({
     required this.socket,
     required this.onValue,
     required this.eventAndEmit,
+    this.data,
   });
 
   @override
@@ -25,7 +27,7 @@ Stream<T?> vStreamController<T extends Equatable>(
   options.socket.on(options.eventAndEmit, (data) {
     controller.addStream(Stream.value(options.onValue(data)));
   });
-  options.socket.emit(options.eventAndEmit);
+  options.socket.emit(options.eventAndEmit, options.data);
   yield* controller.stream;
 }
 
