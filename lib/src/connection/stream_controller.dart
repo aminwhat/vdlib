@@ -6,7 +6,7 @@ import 'package:socket_io_client/socket_io_client.dart' as io;
 
 class VStreamControllerOptions<T extends Equatable> extends Equatable {
   final io.Socket socket;
-  final T Function(Map<String, dynamic> val) onValue;
+  final T Function(dynamic val) onValue;
   final String eventAndEmit;
   final dynamic data;
 
