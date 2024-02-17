@@ -1,10 +1,21 @@
+import 'dart:developer';
+
+import 'package:example/models/models.dart';
 import 'package:flutter/material.dart';
+import 'package:realm/realm.dart';
 import 'package:vdlib/vdlib.dart';
 
 Future<void> main() async {
   await VDLib.init(false);
   final kvdb = VDLib.vKvDB();
   kvdb.dispose();
+
+  final VDB testModel =
+      VDLib.vDB<TestModel>(Configuration.local([TestModel.schema]));
+  testModel.add(TestModel(ObjectId()));
+  log(testModel.changes.toString());
+  testModel.dispose();
+
   runApp(const MyApp());
 }
 

@@ -441,7 +441,7 @@ packages:
     source: hosted
     version: "1.2.3"
   realm:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: realm
       sha256: a53b6903e2f6603c906bf5aac3691f0b2f45262aa08525a4bd546900602f2f17
