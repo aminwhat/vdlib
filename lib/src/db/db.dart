@@ -82,7 +82,7 @@ class VKvDBOptions extends Equatable {
   const VKvDBOptions({
     this.shouldDeleteIfMigrationNeeded = true,
     this.schemaVersion = 0,
-    this.subPath = '/kv/',
+    this.subPath = 'kv',
     this.path,
     this.disablePath = false,
   });
