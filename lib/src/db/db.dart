@@ -41,11 +41,12 @@ class VKvDB {
   late List<KeyValue> changes;
 
   VKvDB(VKvDBOptions options) {
-    realm = Realm(Configuration.local(
-      [KeyValue.schema],
-      shouldDeleteIfMigrationNeeded: options.shouldDeleteIfMigrationNeeded,
-      schemaVersion: options.schemaVersion,
-    ));
+    realm = Realm(options.onConfig?.call(KeyValue.schema) ??
+        Configuration.local(
+          [KeyValue.schema],
+          shouldDeleteIfMigrationNeeded: options.shouldDeleteIfMigrationNeeded,
+          schemaVersion: options.schemaVersion,
+        ));
     changes = realm.all<KeyValue>().toList();
   }
 
@@ -68,12 +69,18 @@ class VKvDB {
 class VKvDBOptions extends Equatable {
   final bool shouldDeleteIfMigrationNeeded;
   final int schemaVersion;
+  final Configuration Function(SchemaObject schema)? onConfig;
 
   const VKvDBOptions({
     this.shouldDeleteIfMigrationNeeded = true,
     this.schemaVersion = 0,
+    this.onConfig,
   });
 
   @override
-  List<Object?> get props => [shouldDeleteIfMigrationNeeded, schemaVersion];
+  List<Object?> get props => [
+        shouldDeleteIfMigrationNeeded,
+        schemaVersion,
+        onConfig,
+      ];
 }
