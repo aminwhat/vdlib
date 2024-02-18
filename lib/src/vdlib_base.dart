@@ -47,9 +47,9 @@ abstract class VDLib {
 
   /// Create Key Value vDB instance
   ///
-  static VKvDB vKvDB() {
+  static VKvDB vKvDB(VKvDBOptions options) {
     _checkForced();
-    return VKvDB();
+    return VKvDB(options);
   }
 
   static void _checkForced() {

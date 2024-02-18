@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:example/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:realm/realm.dart';
@@ -7,7 +6,7 @@ import 'package:vdlib/vdlib.dart';
 
 Future<void> main() async {
   await VDLib.init(false);
-  final kvdb = VDLib.vKvDB();
+  final kvdb = VDLib.vKvDB(const VKvDBOptions());
   kvdb.dispose();
 
   final VDB testModel =

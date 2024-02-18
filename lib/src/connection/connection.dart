@@ -24,14 +24,23 @@ class VConnectionOptions extends Equatable {
   });
 
   @override
-  List<Object?> get props => [subSocketPath, appVersion];
+  List<Object?> get props => [
+        subSocketPath,
+        appVersion,
+        appBuildToken,
+        onLogOut,
+        onStatus,
+      ];
 }
 
 class VConnection {
   final VConnectionOptions options;
   final BuildContext context;
   late final io.Socket socket;
-  late final VKvDB vKvDB = VKvDB();
+  late final VKvDB vKvDB = VKvDB(VKvDBOptions(
+    path: 'v_connection',
+    schemaVersion: int.tryParse(options.subSocketPath) ?? 0,
+  ));
 
   VConnection({
     required this.options,

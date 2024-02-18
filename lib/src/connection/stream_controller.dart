@@ -18,7 +18,7 @@ class VStreamControllerOptions<T extends Equatable> extends Equatable {
   });
 
   @override
-  List<Object?> get props => [socket, onValue, eventAndEmit];
+  List<Object> get props => [socket, onValue, eventAndEmit, data];
 }
 
 Stream<T?> vStreamController<T extends Equatable>(
