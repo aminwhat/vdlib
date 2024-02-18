@@ -45,11 +45,6 @@ class VKvDB {
       [KeyValue.schema],
       shouldDeleteIfMigrationNeeded: options.shouldDeleteIfMigrationNeeded,
       schemaVersion: options.schemaVersion,
-      path: options.disablePath
-          ? null
-          : options.path == null
-              ? '/${options.subPath}/'
-              : '/${options.subPath}/${options.path}/',
     ));
     changes = realm.all<KeyValue>().toList();
   }
@@ -74,25 +69,11 @@ class VKvDBOptions extends Equatable {
   final bool shouldDeleteIfMigrationNeeded;
   final int schemaVersion;
 
-  /// Simple word after special key value path
-  final String? path;
-  final bool disablePath;
-  final String subPath;
-
   const VKvDBOptions({
     this.shouldDeleteIfMigrationNeeded = true,
     this.schemaVersion = 0,
-    this.subPath = 'kv',
-    this.path,
-    this.disablePath = false,
   });
 
   @override
-  List<Object?> get props => [
-        shouldDeleteIfMigrationNeeded,
-        schemaVersion,
-        path,
-        disablePath,
-        subPath,
-      ];
+  List<Object?> get props => [shouldDeleteIfMigrationNeeded, schemaVersion];
 }
