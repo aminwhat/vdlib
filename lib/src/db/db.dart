@@ -45,7 +45,11 @@ class VKvDB {
       [KeyValue.schema],
       shouldDeleteIfMigrationNeeded: options.shouldDeleteIfMigrationNeeded,
       schemaVersion: options.schemaVersion,
-      path: options.disablePath ? null : '/kv/${options.path}/',
+      path: options.disablePath
+          ? null
+          : options.path == null
+              ? '/kv/'
+              : '/kv/${options.path}',
     ));
     changes = realm.all<KeyValue>().toList();
   }
