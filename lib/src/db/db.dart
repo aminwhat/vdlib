@@ -48,8 +48,8 @@ class VKvDB {
       path: options.disablePath
           ? null
           : options.path == null
-              ? '/kv/'
-              : '/kv/${options.path}',
+              ? '/${options.subPath}/'
+              : '/${options.subPath}/${options.path}/',
     ));
     changes = realm.all<KeyValue>().toList();
   }
@@ -77,10 +77,12 @@ class VKvDBOptions extends Equatable {
   /// Simple word after special key value path
   final String? path;
   final bool disablePath;
+  final String subPath;
 
   const VKvDBOptions({
     this.shouldDeleteIfMigrationNeeded = true,
     this.schemaVersion = 0,
+    this.subPath = '/kv/',
     this.path,
     this.disablePath = false,
   });
@@ -91,5 +93,6 @@ class VKvDBOptions extends Equatable {
         schemaVersion,
         path,
         disablePath,
+        subPath,
       ];
 }
