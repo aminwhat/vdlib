@@ -5,7 +5,7 @@ import 'package:realm/realm.dart';
 import 'package:vdlib/vdlib.dart';
 
 Future<void> main() async {
-  await VDLib.init(false);
+  await VDLib.init(const VDLibOptions());
   final kvdb = VDLib.vKvDB(const VKvDBOptions());
   kvdb.dispose();
 

@@ -1,3 +1,4 @@
+import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:realm/realm.dart';
@@ -8,14 +9,16 @@ import 'package:vdlib/src/db/db.dart';
 abstract class VDLib {
   static VConnection? _connection;
   static bool _initialized = false;
-  static bool _forced = false;
+  static VDLibOptions _options = const VDLibOptions();
 
   ///
   /// Initialize when Main part of the app start to function
-  static Future<void> init([bool forced = false]) async {
+  static Future<void> init(VDLibOptions options) async {
     assert(!kIsWeb);
+    _options = options;
+    VKvDB.path = _options.path;
+    VKvDB.customPath = _options.customPath;
     _initialized = true;
-    _forced = forced;
   }
 
   /// Basic Connection to the server
@@ -53,7 +56,7 @@ abstract class VDLib {
   }
 
   static void _checkForced() {
-    if (_forced) {
+    if (_options.forced) {
       assert(_initialized);
       assert(_connection != null);
     }
@@ -61,7 +64,22 @@ abstract class VDLib {
 
   static void dispose() {
     _initialized = false;
-    _forced = false;
+    _options = const VDLibOptions();
     _connection = null;
   }
+}
+
+class VDLibOptions extends Equatable {
+  final bool forced;
+  final String? path;
+  final String? customPath;
+
+  const VDLibOptions({
+    this.forced = false,
+    this.path,
+    this.customPath,
+  }) : assert(!(path != null && customPath != null));
+
+  @override
+  List<Object?> get props => [forced, path, customPath];
 }

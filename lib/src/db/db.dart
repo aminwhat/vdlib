@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:equatable/equatable.dart';
 import 'package:realm/realm.dart';
 import 'package:vdlib/src/connection/connection.dart';
@@ -38,21 +36,23 @@ class VDB<T extends RealmObject> {
 
 class VKvDB {
   static late VConnection vConnection;
+  static String? path;
+  static String? customPath;
 
   late final Realm realm;
   late List<KeyValue> changes;
 
-  VKvDB(VKvDBOptions options) {
+  VKvDB(VKvDBOptions options) : assert(!(path != null && customPath != null)) {
     realm = Realm(options.onConfig?.call(KeyValue.schema) ??
         Configuration.local(
           [KeyValue.schema],
           shouldDeleteIfMigrationNeeded: options.shouldDeleteIfMigrationNeeded,
           schemaVersion: options.schemaVersion,
-          path: options.customPath == null
-              ? (options.path == null
-                  ? "${Platform.isWindows ? "/Program Files/VDLib" : "/VDLib"}/kv/kv.realm"
-                  : "${Platform.isWindows ? "/Program Files/VDLib" : "/VDLib"}/${options.path}/kv/kv.realm")
-              : "${options.customPath}/kv/kv.realm",
+          path: customPath == null
+              ? (path == null
+                  ? "/VDLib/kv/kv.realm"
+                  : "/VDLib/$path/kv/kv.realm")
+              : "$customPath/kv/kv.realm",
         ));
     changes = realm.all<KeyValue>().toList();
   }
@@ -77,23 +77,17 @@ class VKvDBOptions extends Equatable {
   final bool shouldDeleteIfMigrationNeeded;
   final int schemaVersion;
   final Configuration Function(SchemaObject schema)? onConfig;
-  final String? path;
-  final String? customPath;
 
   const VKvDBOptions({
     this.shouldDeleteIfMigrationNeeded = true,
     this.schemaVersion = 0,
     this.onConfig,
-    this.path,
-    this.customPath,
-  }) : assert(!(path != null && customPath != null));
+  });
 
   @override
   List<Object?> get props => [
         shouldDeleteIfMigrationNeeded,
         schemaVersion,
         onConfig,
-        customPath,
-        path,
       ];
 }
