@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:equatable/equatable.dart';
 import 'package:realm/realm.dart';
 import 'package:vdlib/src/connection/connection.dart';
@@ -48,8 +50,8 @@ class VKvDB {
           schemaVersion: options.schemaVersion,
           path: options.customPath == null
               ? (options.path == null
-                  ? "/Program Files/VDLib/kv/kv.realm"
-                  : "/Program Files/VDLib/${options.path}/kv/kv.realm")
+                  ? "${Platform.isWindows ? "/Program Files/VDLib" : "/VDLib"}/kv/kv.realm"
+                  : "${Platform.isWindows ? "/Program Files/VDLib" : "/VDLib"}/${options.path}/kv/kv.realm")
               : "${options.customPath}/kv/kv.realm",
         ));
     changes = realm.all<KeyValue>().toList();
