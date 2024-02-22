@@ -49,9 +49,7 @@ class VKvDB {
           shouldDeleteIfMigrationNeeded: options.shouldDeleteIfMigrationNeeded,
           schemaVersion: options.schemaVersion,
           path: customPath == null
-              ? (path == null
-                  ? "/VDLib/kv/kv.realm"
-                  : "/VDLib/$path/kv/kv.realm")
+              ? (path == null ? "VDLib/kv/kv.realm" : "VDLib/$path/kv/kv.realm")
               : "$customPath/kv/kv.realm",
         ));
     changes = realm.all<KeyValue>().toList();
