@@ -65,7 +65,7 @@ class VKvDB {
   }
 
   String? get(String key) {
-    return realm.find<KeyValue>('appVersion')?.value;
+    return realm.find<KeyValue>(key)?.value;
   }
 
   void dispose() {
