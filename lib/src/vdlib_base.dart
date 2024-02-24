@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:realm/realm.dart';
 import 'package:vdlib/src/connection/connection.dart';
 import 'package:vdlib/src/db/db.dart';
+import 'package:vdlib_web/vdlib_web.dart';
 
 /// *Vazir Database Library*
 abstract class VDLib {

@@ -18,6 +18,8 @@ dependencies:
   equatable: ^2.0.5
   fpdart: ^1.1.0
   url_launcher: ^6.2.4
+  vdlib_web:
+    git: https://github.com/aminwhat/vdlib_web.git
 
 dev_dependencies:
   flutter_test:
