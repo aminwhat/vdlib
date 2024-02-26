@@ -2,8 +2,11 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
+import 'package:vdlib/src/connection/stream_controller.dart';
 import 'package:vdlib/src/db/db.dart';
-import 'package:vdlib_web/vdlib_web.dart';
+import 'package:vdlib/src/widgets/widgets.dart';
+
+export 'stream_controller.dart';
 
 class VConnectionOptions extends Equatable {
   final String subSocketPath;
@@ -133,4 +136,11 @@ class VConnection {
     socket.dispose();
     vKvDB.dispose();
   }
+}
+
+enum ConnectionStatus {
+  connected,
+  connecting,
+  disconnect,
+  error,
 }

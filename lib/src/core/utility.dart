@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:vdlib/src/widgets/widgets.dart';
 
 extension StringUtility on String {
   String capitalize() {
@@ -8,11 +9,7 @@ extension StringUtility on String {
   }
 }
 
-///
-/// Utility
 abstract class Utility {
-  static late SnackBar unableToOpenLinkSnackbar;
-
   static String randomString([int length = 10]) {
     const chars =
         'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
@@ -33,7 +30,13 @@ abstract class Utility {
       mode: LaunchMode.inAppBrowserView,
     )) {
       if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(unableToOpenLinkSnackbar);
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: SnackBarContent(
+              child: SelectableText("خطا در باز کردن لینک: $url "),
+            ),
+          ),
+        );
       }
     }
   }
