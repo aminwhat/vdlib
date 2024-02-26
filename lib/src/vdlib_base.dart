@@ -17,7 +17,6 @@ abstract class VDLib {
     assert(!kIsWeb);
     _options = options;
     VKvDB.path = _options.path;
-    VKvDB.customPath = _options.customPath;
     _initialized = true;
   }
 
@@ -72,14 +71,12 @@ abstract class VDLib {
 class VDLibOptions extends Equatable {
   final bool forced;
   final String? path;
-  final String? customPath;
 
   const VDLibOptions({
     this.forced = false,
     this.path,
-    this.customPath,
-  }) : assert(!(path != null && customPath != null));
+  });
 
   @override
-  List<Object?> get props => [forced, path, customPath];
+  List<Object?> get props => [forced, path];
 }

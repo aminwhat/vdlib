@@ -37,21 +37,17 @@ class VDB<T extends RealmObject> {
 class VKvDB {
   static late VConnection vConnection;
   static String? path;
-  static String? customPath;
 
   late final Realm realm;
   late List<KeyValue> changes;
 
-  VKvDB(VKvDBOptions options) : assert(!(path != null && customPath != null)) {
-    realm = Realm(options.onConfig?.call(KeyValue.schema) ??
-        Configuration.local(
-          [KeyValue.schema],
-          shouldDeleteIfMigrationNeeded: options.shouldDeleteIfMigrationNeeded,
-          schemaVersion: options.schemaVersion,
-          path: customPath == null
-              ? (path == null ? "VDLib/kv/kv.realm" : "VDLib/$path/kv/kv.realm")
-              : "$customPath/kv/kv.realm",
-        ));
+  VKvDB(VKvDBOptions options) {
+    realm = Realm(Configuration.local(
+      [KeyValue.schema],
+      shouldDeleteIfMigrationNeeded: options.shouldDeleteIfMigrationNeeded,
+      schemaVersion: options.schemaVersion,
+      path: (path == null ? "VDLib/kv/kv.realm" : "VDLib/$path/kv/kv.realm"),
+    ));
     changes = realm.all<KeyValue>().toList();
   }
 
@@ -74,18 +70,15 @@ class VKvDB {
 class VKvDBOptions extends Equatable {
   final bool shouldDeleteIfMigrationNeeded;
   final int schemaVersion;
-  final Configuration Function(SchemaObject schema)? onConfig;
 
   const VKvDBOptions({
     this.shouldDeleteIfMigrationNeeded = true,
     this.schemaVersion = 0,
-    this.onConfig,
   });
 
   @override
   List<Object?> get props => [
         shouldDeleteIfMigrationNeeded,
         schemaVersion,
-        onConfig,
       ];
 }
