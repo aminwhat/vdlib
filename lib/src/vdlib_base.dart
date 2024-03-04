@@ -1,7 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:realm/realm.dart';
 import 'package:vdlib/src/connection/connection.dart';
 import 'package:vdlib/src/db/db.dart';
 
@@ -35,16 +34,8 @@ abstract class VDLib {
       context: context,
     );
     assert(_connection != null);
-    VDB.vConnection = _connection!;
     VKvDB.vConnection = _connection!;
     return _connection!;
-  }
-
-  /// Create vDB instance from a Configuration and custom schema
-  ///
-  static VDB vDB<T extends RealmObject>(Configuration config) {
-    _checkForced();
-    return VDB<T>(config);
   }
 
   /// Create Key Value vDB instance

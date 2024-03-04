@@ -5,35 +5,6 @@ import 'package:vdlib/src/db/keyvalue.dart';
 
 export 'keyvalue.dart';
 
-class VDB<T extends RealmObject> {
-  static late VConnection vConnection;
-
-  late final Realm realm;
-  late List<T> changes;
-  VDB(Configuration config) {
-    realm = Realm(config);
-    changes = realm.all<T>().toList();
-  }
-
-  void add(T object) {
-    realm.write(() {
-      realm.add<T>(object, update: true);
-    });
-    changes = realm.all<T>().toList();
-  }
-
-  void delete(T object) {
-    realm.write(() {
-      realm.delete<T>(object);
-    });
-    changes = realm.all<T>().toList();
-  }
-
-  void dispose() {
-    realm.close();
-  }
-}
-
 class VKvDB {
   static late VConnection vConnection;
   static String? path;
