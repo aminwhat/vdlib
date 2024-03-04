@@ -17,6 +17,8 @@ Future<void> loadUriInfoDashboardLogic(BuildContext context) async {
 
 void setInfoDashboardLogic(String uri) {
   final realm = Realm(localConfiguration([Info.schema]));
-  realm.add(Info('dashboard_screen', uri));
+ realm.write((){
+   realm.add(Info('dashboard_screen', uri),update:true);
+ });
   realm.close();
 }
