@@ -13,12 +13,29 @@ class VKvDB {
   late List<KeyValue> changes;
 
   VKvDB(VKvDBOptions options) {
-    realm = Realm(Configuration.local(
-      [KeyValue.schema],
-      shouldDeleteIfMigrationNeeded: options.shouldDeleteIfMigrationNeeded,
-      schemaVersion: options.schemaVersion,
-      path: (path == null ? "VDLib/kv/kv.realm" : "VDLib/$path/kv/kv.realm"),
-    ));
+    late final Configuration config;
+
+    switch (options.vKvType) {
+      case VKvType.inMemory:
+        config = Configuration.inMemory(
+          [KeyValue.schema],
+          path:
+              (path == null ? "VDLib/kv/kv.realm" : "VDLib/$path/kv/kv.realm"),
+        );
+
+        break;
+      case VKvType.local:
+        config = Configuration.local(
+          [KeyValue.schema],
+          shouldDeleteIfMigrationNeeded: options.shouldDeleteIfMigrationNeeded,
+          schemaVersion: options.schemaVersion,
+          path:
+              (path == null ? "VDLib/kv/kv.realm" : "VDLib/$path/kv/kv.realm"),
+        );
+        break;
+    }
+
+    realm = Realm(config);
     changes = realm.all<KeyValue>().toList();
   }
 
@@ -41,10 +58,12 @@ class VKvDB {
 class VKvDBOptions extends Equatable {
   final bool shouldDeleteIfMigrationNeeded;
   final int schemaVersion;
+  final VKvType vKvType;
 
   const VKvDBOptions({
     this.shouldDeleteIfMigrationNeeded = true,
     this.schemaVersion = 0,
+    this.vKvType = VKvType.local,
   });
 
   @override
@@ -53,3 +72,5 @@ class VKvDBOptions extends Equatable {
         schemaVersion,
       ];
 }
+
+enum VKvType { inMemory, local }
