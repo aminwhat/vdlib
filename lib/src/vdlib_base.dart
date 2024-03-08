@@ -15,7 +15,6 @@ abstract class VDLib {
   static Future<void> init(VDLibOptions options) async {
     assert(!kIsWeb);
     _options = options;
-    VKvDB.path = _options.path;
     _initialized = true;
   }
 
@@ -61,13 +60,11 @@ abstract class VDLib {
 
 class VDLibOptions extends Equatable {
   final bool forced;
-  final String? path;
 
   const VDLibOptions({
     this.forced = false,
-    this.path,
   });
 
   @override
-  List<Object?> get props => [forced, path];
+  List<Object> get props => [forced];
 }
