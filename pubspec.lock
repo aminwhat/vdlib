@@ -193,6 +193,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.6"
+  ejson:
+    dependency: transitive
+    description:
+      name: ejson
+      sha256: "2d69382ea016c5f38c9d966681b464ca23d5f594918d4cb7dfecf0a3dad31395"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.0-pre.1"
+  ejson_annotation:
+    dependency: transitive
+    description:
+      name: ejson_annotation
+      sha256: f14948884cf6d91e00c727d5ec6b2395bdcb511541aa7956e4e03b73cd089149
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.0-pre.1"
   equatable:
     dependency: "direct main"
     description:
@@ -468,34 +484,34 @@ packages:
     dependency: "direct main"
     description:
       name: realm
-      sha256: a53b6903e2f6603c906bf5aac3691f0b2f45262aa08525a4bd546900602f2f17
+      sha256: b3f8a2c2a362aefaafb65b9551733d15fd804587caac2c8b1fd1abe535918531
       url: "https://pub.dev"
     source: hosted
-    version: "1.9.0"
+    version: "2.0.0"
   realm_common:
     dependency: transitive
     description:
       name: realm_common
-      sha256: "29516a9e43a9e75b2e16226ce24ccd9a549d9377e69be218394d8fb84da11183"
+      sha256: c4c994217c3f1dafdb3e36b5e3c75c6f4719fd5bd64f64a5acb79a5c962c018f
       url: "https://pub.dev"
     source: hosted
-    version: "1.9.0"
+    version: "2.0.0"
   realm_dart:
     dependency: transitive
     description:
       name: realm_dart
-      sha256: "55cf02d26b0775e79570cf0ba6e4036a10c66250b99cb8f1ee41d71057206a7f"
+      sha256: "861b007dccf19ecfb1e7f47f2b0c246755b82c40e122d61fde18180dbbaf88a3"
       url: "https://pub.dev"
     source: hosted
-    version: "1.9.0"
+    version: "2.0.0"
   realm_generator:
     dependency: transitive
     description:
       name: realm_generator
-      sha256: "6d26ca214aad1b49f37a1a86f3216f19a25657d38d82cefb16551a35aa316ec1"
+      sha256: "3cad739d4491bc5b4ccdd184083fd58f6899e410d0acda7448b60261639e2735"
       url: "https://pub.dev"
     source: hosted
-    version: "1.9.0"
+    version: "2.0.0"
   sane_uuid:
     dependency: transitive
     description:
@@ -621,6 +637,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.1"
+  type_plus:
+    dependency: transitive
+    description:
+      name: type_plus
+      sha256: "2e33cfac2e129297d5874567bdf7587502ec359881e9318551e014d91b02f84a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
   typed_data:
     dependency: transitive
     description:
