@@ -225,6 +225,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.2"
+  ejson:
+    dependency: transitive
+    description:
+      name: ejson
+      sha256: "2d69382ea016c5f38c9d966681b464ca23d5f594918d4cb7dfecf0a3dad31395"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.0-pre.1"
+  ejson_annotation:
+    dependency: transitive
+    description:
+      name: ejson_annotation
+      sha256: f14948884cf6d91e00c727d5ec6b2395bdcb511541aa7956e4e03b73cd089149
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.0-pre.1"
   equatable:
     dependency: "direct main"
     description:
@@ -330,18 +346,18 @@ packages:
     dependency: "direct dev"
     description:
       name: flutter_lints
-      sha256: a25a15ebbdfc33ab1cd26c63a6ee519df92338a9c10f122adda92938253bef04
+      sha256: e2a421b7e59244faef694ba7b30562e489c2b489866e505074eb005cd7060db7
       url: "https://pub.dev"
     source: hosted
-    version: "2.0.3"
+    version: "3.0.1"
   flutter_riverpod:
     dependency: "direct main"
     description:
       name: flutter_riverpod
-      sha256: "4bce556b7ecbfea26109638d5237684538d4abc509d253e6c5c4c5733b360098"
+      sha256: "0f1974eff5bbe774bf1d870e406fc6f29e3d6f1c46bd9c58e7172ff68a785d7d"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.10"
+    version: "2.5.1"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -476,10 +492,10 @@ packages:
     dependency: transitive
     description:
       name: lints
-      sha256: "0a217c6c989d21039f1498c3ed9f3ed71b354e69873f13a8dfc3c9fe76f1b452"
+      sha256: cbf8d4b858bb0134ef3ef87841abdf8d63bfc255c266b7bf6b39daa1085c4290
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.1"
+    version: "3.0.0"
   logging:
     dependency: transitive
     description:
@@ -660,42 +676,42 @@ packages:
     dependency: "direct main"
     description:
       name: realm
-      sha256: a53b6903e2f6603c906bf5aac3691f0b2f45262aa08525a4bd546900602f2f17
+      sha256: b3f8a2c2a362aefaafb65b9551733d15fd804587caac2c8b1fd1abe535918531
       url: "https://pub.dev"
     source: hosted
-    version: "1.9.0"
+    version: "2.0.0"
   realm_common:
     dependency: transitive
     description:
       name: realm_common
-      sha256: "29516a9e43a9e75b2e16226ce24ccd9a549d9377e69be218394d8fb84da11183"
+      sha256: c4c994217c3f1dafdb3e36b5e3c75c6f4719fd5bd64f64a5acb79a5c962c018f
       url: "https://pub.dev"
     source: hosted
-    version: "1.9.0"
+    version: "2.0.0"
   realm_dart:
     dependency: transitive
     description:
       name: realm_dart
-      sha256: "55cf02d26b0775e79570cf0ba6e4036a10c66250b99cb8f1ee41d71057206a7f"
+      sha256: "861b007dccf19ecfb1e7f47f2b0c246755b82c40e122d61fde18180dbbaf88a3"
       url: "https://pub.dev"
     source: hosted
-    version: "1.9.0"
+    version: "2.0.0"
   realm_generator:
     dependency: transitive
     description:
       name: realm_generator
-      sha256: "6d26ca214aad1b49f37a1a86f3216f19a25657d38d82cefb16551a35aa316ec1"
+      sha256: "3cad739d4491bc5b4ccdd184083fd58f6899e410d0acda7448b60261639e2735"
       url: "https://pub.dev"
     source: hosted
-    version: "1.9.0"
+    version: "2.0.0"
   riverpod:
     dependency: transitive
     description:
       name: riverpod
-      sha256: "548e2192eb7aeb826eb89387f814edb76594f3363e2c0bb99dd733d795ba3589"
+      sha256: f21b32ffd26a36555e501b04f4a5dca43ed59e16343f1a30c13632b2351dfa4d
       url: "https://pub.dev"
     source: hosted
-    version: "2.5.0"
+    version: "2.5.1"
   sane_uuid:
     dependency: transitive
     description:
@@ -837,6 +853,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.1"
+  type_plus:
+    dependency: transitive
+    description:
+      name: type_plus
+      sha256: "2e33cfac2e129297d5874567bdf7587502ec359881e9318551e014d91b02f84a"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
   typed_data:
     dependency: transitive
     description:
@@ -915,7 +939,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.1.4"
+    version: "0.1.5"
   vector_math:
     dependency: transitive
     description:
