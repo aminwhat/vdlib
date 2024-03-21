@@ -9,14 +9,14 @@ import 'package:vdlib/src/widgets/widgets.dart';
 export 'stream_controller.dart';
 
 class VConnectionOptions extends Equatable {
-  final String subSocketPath;
+  final String url;
   final String appVersion;
   final String appBuildToken;
   final void Function()? onLogOut;
   final void Function(dynamic data)? onStatus;
 
   const VConnectionOptions({
-    required this.subSocketPath,
+    required this.url,
     required this.appVersion,
     required this.appBuildToken,
     this.onLogOut,
@@ -25,7 +25,7 @@ class VConnectionOptions extends Equatable {
 
   @override
   List<Object?> get props => [
-        subSocketPath,
+        url,
         appVersion,
         appBuildToken,
         onLogOut,
@@ -38,7 +38,7 @@ class VConnection {
   final BuildContext context;
   late final io.Socket socket;
   late final VKvDB vKvDB = VKvDB(VKvDBOptions(
-    schemaVersion: int.tryParse(options.subSocketPath) ?? 0,
+    schemaVersion: int.tryParse(options.appVersion[0]) ?? 0,
   ));
 
   VConnection({
@@ -47,7 +47,7 @@ class VConnection {
     required void Function(ConnectionStatus status) onStatus,
   }) {
     socket = io.io(
-      '${kDebugMode ? 'http://localhost:3779' : 'https://api.vazir.io'}/${options.subSocketPath}.v${options.appVersion[0]}',
+      '${kDebugMode ? 'http://localhost:3779' : options.url}/v${options.appVersion[0]}',
       io.OptionBuilder().setTransports(['websocket']).setAuth({
         'clientId': vKvDB.get('vdlib_connection_clientId'),
         'version': options.appVersion,
