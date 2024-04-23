@@ -2,7 +2,6 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:vdlib/src/connection/connection.dart';
-import 'package:vdlib/src/db/db.dart';
 
 /// *Vazir Database Library*
 abstract class VDLib {
@@ -33,22 +32,7 @@ abstract class VDLib {
       context: context,
     );
     assert(_connection != null);
-    VKvDB.vConnection = _connection!;
     return _connection!;
-  }
-
-  /// Create Key Value vDB instance
-  ///
-  static VKvDB vKvDB(VKvDBOptions options) {
-    _checkForced();
-    return VKvDB(options);
-  }
-
-  static void _checkForced() {
-    if (_options.forced) {
-      assert(_initialized);
-      assert(_connection != null);
-    }
   }
 
   static void dispose() {

@@ -1,4 +1,4 @@
-import 'package:example/apis/logic/info_logic.dart';
+// import 'package:example/apis/logic/info_logic.dart';
 import 'package:example/apis/v_connetion/v_connection.dart';
 import 'package:example/core/global.dart';
 import 'package:example/data/dto/info.dart';
@@ -58,7 +58,7 @@ class _DashboardScreenState extends State<DashboardScreen> with StreamListener {
     streamListener<InfoDto>(
       getInfo(GLobal.vConnection.socket, 'dashboard_screen'),
       (data) {
-        setInfoDashboardLogic(data!.uri);
+        // setInfoDashboardLogic(data!.uri);
       },
     );
     super.initState();
@@ -152,7 +152,7 @@ class _DashboardScreenState extends State<DashboardScreen> with StreamListener {
               child: FloatingActionButton(
                 tooltip: 'راهنما',
                 onPressed: () async {
-                  await loadUriInfoDashboardLogic(context);
+                  // await loadUriInfoDashboardLogic(context);
                 },
                 elevation: 0,
                 child: const Icon(Icons.question_mark_outlined),

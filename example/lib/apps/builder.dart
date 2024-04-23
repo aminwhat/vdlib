@@ -29,7 +29,8 @@ class _AppBuilderState extends State<AppBuilder> with StreamListener {
         GLobal.vConnection = VDLib.vConnection(
           context,
           VConnectionOptions(
-            subSocketPath: 'hessab',
+            url: '',
+            // subSocketPath: 'hessab',
             appVersion: appVersion,
             appBuildToken: appBuildToken,
             onStatus: (data) {

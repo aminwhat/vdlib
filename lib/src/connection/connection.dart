@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
 import 'package:vdlib/src/connection/stream_controller.dart';
-import 'package:vdlib/src/db/db.dart';
+
 import 'package:vdlib/src/widgets/widgets.dart';
 
 export 'stream_controller.dart';
@@ -37,9 +37,6 @@ class VConnection {
   final VConnectionOptions options;
   final BuildContext context;
   late final io.Socket socket;
-  late final VKvDB vKvDB = VKvDB(VKvDBOptions(
-    schemaVersion: int.tryParse(options.appVersion[0]) ?? 0,
-  ));
 
   VConnection({
     required this.options,
@@ -49,7 +46,6 @@ class VConnection {
     socket = io.io(
       '${kDebugMode ? 'http://localhost:3779' : options.url}/v${options.appVersion[0]}',
       io.OptionBuilder().setTransports(['websocket']).setAuth({
-        'clientId': vKvDB.get('vdlib_connection_clientId'),
         'version': options.appVersion,
         'token': options.appBuildToken,
       }).build(),
@@ -93,10 +89,6 @@ class VConnection {
 
     socket.on('credentials', (data) {
       Map<String, dynamic> receivedData = data as Map<String, dynamic>;
-      vKvDB.set(KeyValue(
-        'vdlib_connection_clientId',
-        value: receivedData['clientId'].toString(),
-      ));
       socket.auth = {
         'token': options.appBuildToken,
         'clientId': receivedData['clientId'].toString(),
@@ -134,7 +126,6 @@ class VConnection {
 
   void dispose() {
     socket.dispose();
-    vKvDB.dispose();
   }
 }
 
